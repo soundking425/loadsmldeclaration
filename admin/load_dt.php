@@ -100,6 +100,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_REQUEST['LoadDt'] == 'Y') {
             $bLoadComplete = true;
             unlink($filePathDt);
             unlink($filePathFreeDoc);
+            header('Content-Type: application/json');
+            echo json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+            die;
         } catch (Exception $e) {
             $arError[] = [
                 "id" => "IMPORT",
@@ -107,9 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_REQUEST['LoadDt'] == 'Y') {
             ];
         }
 
-        header('Content-Type: application/json');
-        echo json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
-        die;
+
     }
 
     $e = new CAdminException($arError);
