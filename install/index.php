@@ -38,6 +38,10 @@ class LoadXmlDeclaration extends CModule
         $this->InstallFiles();
         RegisterModule($this->MODULE_ID);
 
+        COption::SetOptionString("loadxmldeclaration", "classifier_type_procedures", "10,40");
+        COption::SetOptionString("loadxmldeclaration", "classifier_decisions_taken_customs_authorities", "10,11,12,13,14,20");
+        COption::SetOptionString("loadxmldeclaration", "classifier_type_document", "01");
+
         return false;
     }
 

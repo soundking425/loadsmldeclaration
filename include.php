@@ -5,7 +5,7 @@ use \Bitrix\Main\EventManager;
 IncludeModuleLangFile(__FILE__);
 
 \Bitrix\Main\Loader::registerAutoLoadClasses(
-    'LoadXmlDeclaration',
+    'loadxmldeclaration',
     [
         'AbstractXmlParser' => 'classes/general/AbstractXmlParser.php',
         'DeclarationParser' => 'classes/general/DeclarationParser.php',

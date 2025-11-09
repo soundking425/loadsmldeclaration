@@ -3,6 +3,9 @@
 class DeclarationParser extends AbstractXmlParser
 {
     private array $freeDoc;
+    private array $type_procedures;
+    private array $decisions_taken_customs;
+    private string $type_document;
 
     /**
      * @param string $filePath
@@ -13,6 +16,10 @@ class DeclarationParser extends AbstractXmlParser
     {
         parent::__construct($filePath);
         $this->freeDoc = (new FreeDocParser($freeDocFilePath))->parse();
+
+        $this->type_procedures = explode(',', COption::GetOptionString('loadxmldeclaration', 'classifier_type_procedures'));
+        $this->decisions_taken_customs = explode(',', COption::GetOptionString('loadxmldeclaration', 'classifier_decisions_taken_customs_authorities'));
+        $this->type_document = COption::GetOptionString('loadxmldeclaration', 'classifier_type_document');
     }
 
     /**
@@ -98,7 +105,7 @@ class DeclarationParser extends AbstractXmlParser
         $documentsGroup = $xpath->query('./*[local-name()="ESADout_CUPresentedDocument"]', $context);
         foreach ($documentsGroup as $doc) {
             $code = $this->getValue($xpath, './/*[local-name()="PresentedDocumentModeCode"]', $doc);
-            if ($code === null || !str_starts_with($code, '01')) {
+            if ($code === null || !str_starts_with($code, $this->type_document)) {
                 continue;
             }
 

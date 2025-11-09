@@ -14,7 +14,7 @@ if (!$USER->CanDoOperation('edit_other_settings'))
 /** @var CAdminMessage $message */
 
 
-CModule::IncludeModule("LoadXmlDeclaration");
+CModule::IncludeModule("loadxmldeclaration");
 $arError = [];
 
 $bLoadComplete = false;
@@ -94,8 +94,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_REQUEST['LoadDt'] == 'Y') {
     }
 
     if (empty($arError)) {
-        $LoadXmlDt = new DeclarationParser($filePathDt, $filePathFreeDoc);
         try {
+            $LoadXmlDt = new DeclarationParser($filePathDt, $filePathFreeDoc);
             $data = $LoadXmlDt->parse();
             $bLoadComplete = true;
             unlink($filePathDt);
